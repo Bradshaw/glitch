@@ -8,11 +8,13 @@ import './roboto.css';
 
 import React from 'react';
 import ReactDOM from 'react-dom';
+import Clipboard from 'clipboard';
 
 import Glitch from './glitch.jsx';
 import App from './jsx/app.jsx';
 
 var glitch;
+var clipboard = new Clipboard('.btn');
 
 window.onload = function() {
   try {

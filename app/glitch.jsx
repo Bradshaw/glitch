@@ -8,6 +8,17 @@ var FUNCS = {
       return 0;
     }
   },
+  'g': function(a,off){
+    if (a){
+      console.log(off);
+      var off = off() || 0;
+      var amt = 0xFFF*2;
+      var o = (amt/4)*off;
+      return (((a()+o)/(0xFFF*2))%2>1?255:0);
+    } else {
+      return 0;
+    }
+  },
   'r': function() {
     return Math.random()*255;
   },
@@ -99,14 +110,19 @@ export default class Glitch {
     this.input = s;
     var f = expr.parse(s, this.vars, FUNCS);
     if (f) {
+      console.log("YES")
       this.validInput = s;
       window.location.hash = encodeURIComponent(s);
       if (this.player) {
         this.player = f;
       }
     } else {
+      console.log("NO")
       this.validInput = undefined;
     }
+  }
+  isValid() {
+    return typeof(this.validInput)!=='undefined';
   }
 
   waveFile() {
@@ -128,7 +144,7 @@ export default class Glitch {
     intBuffer[7] = 0x2074; // "t "
     intBuffer[8] = 0x0012; // fmt chunksize: 18
     intBuffer[9] = 0x0000; //
-    intBuffer[10] = 0x0001; // format tag : 1 
+    intBuffer[10] = 0x0001; // format tag : 1
     intBuffer[11] = 1;     // channels: 1
     intBuffer[12] = this.sampleRate & 0x0000ffff; // sample per sec
     intBuffer[13] = (this.sampleRate & 0xffff0000) >> 16; // sample per sec
@@ -140,7 +156,7 @@ export default class Glitch {
     intBuffer[19] = 0x6164; // "da"
     intBuffer[20] = 0x6174; // "ta"
     intBuffer[21] = (2*length) & 0x0000ffff; // data size[byte]
-    intBuffer[22] = ((2*length) & 0xffff0000) >> 16; // data size[byte]  
+    intBuffer[22] = ((2*length) & 0xffff0000) >> 16; // data size[byte]
 
     for (var i = 0; i < length; i++) {
       var v = wave();
@@ -167,4 +183,3 @@ export default class Glitch {
     }, 100);
   }
 }
-

@@ -40,6 +40,7 @@ export default class App extends React.Component {
     var width = document.documentElement.clientWidth;
     var height = document.documentElement.clientHeight;
     var content;
+    var content2;
     var playButton;
 
     if (this.state.mode == 'code') {
@@ -49,6 +50,7 @@ export default class App extends React.Component {
     } else {
       content = <Manual />
     }
+    content2 = <Library glitch={this.props.glitch} />
 
     if (this.props.glitch.player) {
       playButton = <IconButton
@@ -67,43 +69,15 @@ export default class App extends React.Component {
     return <div className="content" style={{display: 'flex', flexDirection: 'row'}}>
       <div style={{display: 'flex', flex: '1', flexDirection: 'column'}}>
 	<Header glitch={this.props.glitch} />
-	<div style={{flex: '1', display: 'flex'}}>
-	  {content}
-	</div>
+    	<div style={{flex: '1', display: 'flex', height: '300px'}}>
+    	  {content}
+    	</div>
+      <div style={{flex: '1', display: 'flex'}}>
+        {content2}
+    	</div>
       </div>
       <div style={{width:'72px', display: 'flex', flexDirection: 'column'}}>
 	{playButton}
-	<IconButton
-	  icon="fa-code"
-	  active={this.state.mode == "code"}
-	  onClick={this.nav.bind(this, 'code')}/>
-	<IconButton
-	  icon="fa-folder-open"
-	  active={this.state.mode == "lib"}
-	  onClick={this.nav.bind(this, 'lib')}/>
-	{
-	  // TODO: live instrument input
-	}
-	<IconButton
-	  icon="fa-question"
-	  active={this.state.mode == "manual"}
-	  onClick={this.nav.bind(this, 'manual')}/>
-	<div style={{flex: '1'}}></div>
-	<IconButton
-	  icon="fa-floppy-o"
-	  active={true}
-	  onClick={this.save.bind(this)}/>
-	<a 
-	  style={{
-	    height: '72px', lineHeight: '72px', textAlign: 'center', cursor: 'pointer',
-	    fontSize: '20pt',
-	    color: '#03a9f4',
-	  }}
-	  href={
-	    "https://twitter.com/intent/tweet?" +
-	    "text=I made a bytebeat tune!&" +
-	      "hashtags=glitch&url="+encodeURIComponent(window.location.href)}>
-	      <i className="fa fa-bird"></i></a>
       </div>
     </div>
   }

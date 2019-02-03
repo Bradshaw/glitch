@@ -8,7 +8,7 @@ div, p, h1, h2, h3, h4, h5, h6 {
 }
 
 html {
-  background-color:#cddc39;
+  background-color:#FFFFFF;
   min-height: 100%;
   height: 100%;
 }
@@ -22,9 +22,9 @@ body {
 
 #container {
   display: flex;
-  width: 800px;
+  width: 90%;
   padding-left: 1em;
-  min-height: 500px;
+  height: 90%;
   box-shadow: 8px 8px 0px 0px rgba(0,0,0,0.5);
   background-color:#333;
 }
@@ -90,4 +90,10 @@ textarea, .monospace {
 body {
   scrollbar-face-color: #ffc107;
   scrollbar-track-color: #444;
+}
+.bad {
+  color: #F88
+}
+.good {
+  color: #8F8
 }
